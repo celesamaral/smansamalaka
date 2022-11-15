@@ -30,7 +30,7 @@ class UserModel extends Model
         'password' => 'required',
         'password_confirmation' => 'required|matches[password]',
         'user_active' => 'required',
-        'userfile' => 'is_image[userfile]'
+        // 'userfile' => 'is_image[userfile]'
     ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
