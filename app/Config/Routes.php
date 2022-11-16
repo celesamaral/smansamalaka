@@ -62,9 +62,11 @@ $routes->group('admin', ['filter' => 'adminFilter'], static function ($routes) {
 
     $routes->get('siswa/baru', 'Siswa::index');
     $routes->get('siswa/aktif', 'Siswa::siswa_aktif');
-    $routes->get('siswa/edit/(:any)', 'Siswa::edit/$1');
+    $routes->get('siswa/(:any)/edit', 'Siswa::edit/$1');
+    $routes->get('siswa/(:any)', 'Siswa::detail/$1');
     $routes->post('siswa/store', 'Siswa::store');
     $routes->post('siswa/update', 'Siswa::update');
+    $routes->post('siswa/hapus', 'Siswa::hapus');
 
     $routes->get('pembagian_kelas/', 'Kelas::pembagian');
     // $routes->get('pembagian_kelas/(:any)', 'Kelas::pembagian_jurusan/$1');

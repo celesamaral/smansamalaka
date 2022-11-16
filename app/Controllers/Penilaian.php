@@ -97,6 +97,8 @@ class Penilaian extends BaseController
     {
         $kd_id = $this->request->getPost('kd_id');
         // $nilaisiswa_jenis = $this->request->getPost('jenis');
+        $model = new KdModel();
+        $kd = $model->find($kd_id);
         $siswa_id = $this->request->getPost('siswa_id');
         $model = new TahunAjaranModel();
         $tahunajaran = $model->where('tahunajaran.tahunajaran_status', 'aktif')->first();
@@ -148,7 +150,7 @@ class Penilaian extends BaseController
                 }
             }
             // dd($gagal);
-            return redirect()->to('guru/penilaian/' . $kelas_id)
+            return redirect()->to('guru/penilaian/' . $kelas_id . '/' . $kd->mapel_id)
                 ->with('message', 'Nilai Tersimpan')
                 ->with('gagal', $gagal);
         }

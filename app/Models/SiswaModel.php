@@ -104,7 +104,7 @@ class SiswaModel extends Model
 
     public function findProfil($siswa_id)
     {
-        $this->join('user', 'user.user_id = siswa.user_id');
+        $this->join('user', 'user.user_id = siswa.user_id', 'left');
         $this->where('siswa.siswa_id', $siswa_id);
 
         $result = $this->first();

@@ -27,6 +27,13 @@ class Siswa extends BaseController
 
     public function detail($siswa_id)
     {
+        $model = new SiswaModel();
+        $siswa = $model->findProfil($siswa_id);
+        $data = [
+            'title' => 'Data Siswa',
+            'siswa' => $siswa
+        ];
+        return view('siswa/detail', $data);
     }
 
     public function store()
@@ -48,6 +55,7 @@ class Siswa extends BaseController
 
     public function edit($siswa_id)
     {
+        helper('form');
         $model = new SiswaModel();
         $siswa = $model->find($siswa_id);
 
@@ -70,7 +78,13 @@ class Siswa extends BaseController
         $model = new SiswaModel();
 
         if ($model->update($siswa_id, $data)) {
-            return redirect('admin/siswa')
+            $path = 'admin/siswa';
+            $siswa = $model->find($siswa_id);
+            if ($siswa->siswa_status = 'aktif')
+                $path .= '/aktif';
+            else
+                $path .= '/baru';
+            return redirect()->to($path)
                 ->with('message', 'Data berhasil disimpan');
         }
         return redirect()->to(previous_url())
