@@ -132,4 +132,12 @@ class SiswaModel extends Model
         $this->where('siswa.siswa_id', $siswa_id);
         return $this->first();
     }
+    public function findAbsensi($absensi_id, $kelas_id)
+    {
+        $this->select('siswa.siswa_id as siswaId, siswa.siswa_nama, detailabsensi.*, absensi.*');
+        $this->where('kelas_id', $kelas_id);
+        $this->join('detailabsensi', 'siswa.siswa_id = detailabsensi.siswa_id AND detailabsensi.absensi_id = ' . $absensi_id, 'left');
+        $this->join('absensi', 'absensi.absensi_id = detailabsensi.absensi_id', 'left');
+        return $this->findAll();
+    }
 }

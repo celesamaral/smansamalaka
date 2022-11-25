@@ -144,6 +144,13 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('siswa/absensi') ?>">
+          <i class="bi bi-clipboard"></i>
+          <span>Absensi</span>
+        </a>
+      </li>
+
 
       <li class="nav-heading">Nilai</li>
 

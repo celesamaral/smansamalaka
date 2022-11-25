@@ -3,6 +3,7 @@
 use App\Controllers\WaliKelas;
 use App\Models\GuruModel;
 use App\Models\SiswaModel;
+use App\Models\TahunAjaranModel;
 use App\Models\UserModel;
 use App\Models\WaliKelasModel;
 
@@ -43,4 +44,10 @@ function cekWali()
     if (!empty($result))
         return true;
     return false;
+}
+function tahunajaran()
+{
+    $model = new TahunAjaranModel();
+    $model->where('tahunajaran_status', 'aktif');
+    return $model->first();
 }

@@ -51,6 +51,14 @@ class WaliKelasModel extends Model
         $this->join('jurusan', 'jurusan.jurusan_id = kelas.jurusan_id');
         return $this->find();
     }
+    public function findKelasWaliSingle($guru_id)
+    {
+        $this->where('walikelas.guru_id', $guru_id);
+        $this->join('guru', 'guru.guru_id = walikelas.guru_id');
+        $this->join('kelas', 'kelas.kelas_id = walikelas.kelas_id');
+        $this->join('jurusan', 'jurusan.jurusan_id = kelas.jurusan_id');
+        return $this->first();
+    }
 
     public function cekWaliKelas($guru_id, $kelas_id)
     {

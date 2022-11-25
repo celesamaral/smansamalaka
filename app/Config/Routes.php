@@ -87,6 +87,10 @@ $routes->group('admin', ['filter' => 'adminFilter'], static function ($routes) {
     $routes->post('update_profile', 'Profil::update_profile');
     $routes->post('ganti_username', 'Profil::ganti_username');
     $routes->post('ganti_password', 'Profil::ganti_password');
+
+    $routes->get('absensi', 'Absensi::index');
+    $routes->post('absensi/store', 'Absensi::store');
+    $routes->post('absensi/hapus', 'Absensi::hapus');
 });
 
 $routes->group('admin/admin', ['filter' => 'adminFilter'], static function ($routes) {
@@ -130,6 +134,10 @@ $routes->group('guru', ['filter' => 'guruFilter'], static function ($routes) {
     $routes->post('ganti_password', 'Profil::ganti_password');
     $routes->post('update_profile', 'Profil::update_profile');
     $routes->post('hitung_nilai', 'Penilaian::hitung_nilai');
+
+    $routes->get('absensi', 'Absensi::index_guru');
+    $routes->get('absensi/(:any)', 'Absensi::detail/$1');
+    $routes->post('absensi/absen', 'Absensi::absen');
 });
 
 $routes->group('siswa', ['filter' => 'siswaFilter'], static function ($routes) {
@@ -143,6 +151,7 @@ $routes->group('siswa', ['filter' => 'siswaFilter'], static function ($routes) {
     $routes->get('profil', 'Profil::profil_siswa');
     $routes->post('ganti_password', 'Profil::ganti_password');
     $routes->post('update_profile', 'Profil::update_profile');
+    $routes->get('absensi', 'Absensi::rekap_absen_siswa');
 });
 
 $routes->group('auth', static function ($routes) {
