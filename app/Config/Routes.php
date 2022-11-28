@@ -91,6 +91,13 @@ $routes->group('admin', ['filter' => 'adminFilter'], static function ($routes) {
     $routes->get('absensi', 'Absensi::index');
     $routes->post('absensi/store', 'Absensi::store');
     $routes->post('absensi/hapus', 'Absensi::hapus');
+
+    $routes->get('mutasi_kelas', 'Kelas::mutasi_daftarkelas', ['filter' => 'tahunMutasiFilter']);
+    $routes->get('mutasi_kelas/error', 'Kelas::error_mutasi');
+    $routes->get('mutasi_kelas/(:num)', 'Kelas::mutasi_daftarsiswa/$1');
+    $routes->post('mutasi_kelas/sementara', 'Kelas::mutasi_sementara');
+    $routes->post('mutasi_kelas/cancel', 'Kelas::cancel_mutasi');
+    $routes->post('mutasi_kelas/store_all', 'Kelas::store_mutasi');
 });
 
 $routes->group('admin/admin', ['filter' => 'adminFilter'], static function ($routes) {

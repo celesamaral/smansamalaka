@@ -224,4 +224,92 @@ class Kelas extends BaseController
         return redirect()->to(previous_url())
             ->with('message', 'Pembagian kelas berhasil');
     }
+    //====================MUTASI===========================
+    public function mutasi_daftarkelas()
+    {
+        helper('form');
+        $model = new KelasModel();
+        $data_kelas = $model->findUnderXII();
+        foreach ($data_kelas as $key => $kelas) {
+            $model = new SiswaModel();
+            $jumlah_siswa = $model->countSiswa(['kelas_id' => $kelas->kelas_id]);
+            $jumlah_mutasi = $model->countSiswa(['kelas_id' => $kelas->kelas_id, 'siswa_kelastemp !=' => null]);
+            $data_kelas[$key]->jumlah_siswa = $jumlah_siswa;
+            $data_kelas[$key]->jumlah_mutasi = $jumlah_mutasi;
+        }
+        $data = [
+            'title' => 'Mutasi Kelas',
+            'data_kelas' => $data_kelas
+        ];
+
+        return view('mutasi/daftar_kelas', $data);
+    }
+
+    public function mutasi_daftarsiswa($kelas_id)
+    {
+        helper('form');
+        $model = new KelasModel();
+        $kelas_sekarang = $model->findSingle($kelas_id);
+        $kelas_atas = $model->findKelasAtas($kelas_sekarang->kelas_tingkat, $kelas_sekarang->jurusan_id);
+
+        $model = new SiswaModel();
+        $siswa_sekarang = $model->findBelumMutasi($kelas_id);
+        $siswa_mutasi = $model->findMutasi($kelas_id);
+
+        $data = [
+            'title' => 'Mutasi Kelas Siswa',
+            'kelas_sekarang' => $kelas_sekarang,
+            'kelas_atas' => $kelas_atas,
+            'siswa_sekarang' => $siswa_sekarang,
+            'siswa_mutasi' => $siswa_mutasi,
+        ];
+
+        return view('mutasi/daftar_siswa', $data);
+    }
+
+    public function mutasi_sementara()
+    {
+        $siswa = $this->request->getPost('siswa');
+        $kelas = $this->request->getPost('kelas');
+        // dd($kelas);
+        $model = new SiswaModel();
+        foreach ($siswa as $siswa_id) {
+            $data = [
+                'siswa_kelastemp' => $kelas
+            ];
+            $model->update($siswa_id, $data);
+        }
+        return redirect()->to(previous_url())
+            ->with('message', 'Berhasil!');
+    }
+
+    public function cancel_mutasi()
+    {
+        $siswa_id = $this->request->getPost('siswa_id');
+        $model = new SiswaModel();
+        $model->update($siswa_id, ['siswa_kelastemp' => null]);
+        return redirect()->to(previous_url())
+            ->with('message', 'Berhasil dibatalkan');
+    }
+
+    public function error_mutasi()
+    {
+        $data['title'] = 'No Access!';
+        return view('mutasi/error_ta', $data);
+    }
+
+    public function store_mutasi()
+    {
+        $model = new SiswaModel();
+        $siswa_mutasi = $model->findMutasi();
+        foreach ($siswa_mutasi as $siswa) {
+            $data = [
+                'kelas_id' => $siswa->siswa_kelastemp,
+                'siswa_kelastemp' => null
+            ];
+            $model->update($siswa->siswa_id, $data);
+        }
+        return redirect()->to(previous_url())
+            ->with('message', 'Berhasil!');
+    }
 }

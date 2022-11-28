@@ -5,6 +5,7 @@ namespace Config;
 use App\Filters\AdminFilter;
 use App\Filters\GuruFilter;
 use App\Filters\SiswaFilter;
+use App\Filters\TahunMutasiFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -29,7 +30,8 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'adminFilter' => AdminFilter::class,
         'guruFilter' => GuruFilter::class,
-        'siswaFilter' => SiswaFilter::class
+        'siswaFilter' => SiswaFilter::class,
+        'tahunMutasiFilter' => TahunMutasiFilter::class
     ];
 
     /**

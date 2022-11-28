@@ -392,23 +392,29 @@ class Penilaian extends BaseController
         $data_mapel = $model->findMapelSiswa($siswa_id, $tahunajaran->tahunajaran_id);
         foreach ($data_mapel as $i => $mapel) {
             $model = new KdModel();
-
-            $data_kd  = $model->getKDOnly($mapel->mapel_id);
+            $data_kd = $model->getKDOnly($mapel->mapel_id);
             $uts = $model->getUTS($mapel->mapel_id);
             $uas = $model->getUAS($mapel->mapel_id);
-
+            $akhir = $model->getNilaiAkhir($mapel->mapel_id);
             $nilai_uas = 0;
             $nilai_uts = 0;
+            $nilai_akhir = 0;
 
             $model = new NilaisiswaModel();
+
             if (!empty($uas)) {
                 $nilai_uas = $model->getNilai($siswa_id, $uas->kd_id, $tahunajaran->tahunajaran_id);
             }
             if (!empty($uts)) {
                 $nilai_uts = $model->getNilai($siswa_id, $uts->kd_id, $tahunajaran->tahunajaran_id);
             }
+            if (!empty($akhir)) {
+                $nilai_akhir = $model->getNilai($siswa_id, $akhir->kd_id, $tahunajaran->tahunajaran_id);
+            }
+
             $data_mapel[$i]->uas = $nilai_uas;
             $data_mapel[$i]->uts = $nilai_uts;
+            $data_mapel[$i]->akhir = $nilai_akhir;
 
             foreach ($data_kd as $j => $kd) {
                 $nilai = $model->getNilaiSiswa($siswa_id, $kd->kd_id, $tahunajaran->tahunajaran_id);

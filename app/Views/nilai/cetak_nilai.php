@@ -11509,7 +11509,7 @@
                     <?php endforeach; ?>
                     <td><?= $mapel->uts ?></td>
                     <td><?= $mapel->uas ?></td>
-                    <td>0</td>
+                    <td><?= $mapel->akhir ?></td>
 
                 </tr>
 

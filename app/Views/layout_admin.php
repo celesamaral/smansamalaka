@@ -204,11 +204,23 @@
           <span>Mata Pelajaran</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('admin/mutasi_kelas') ?>">
+          <i class="bi bi-card-list"></i>
+          <span>Pengumuman</span>
+        </a>
+      </li>
       <li class="nav-heading">Akademik</li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="<?= base_url('admin/pembagian_kelas') ?>">
           <i class="bi bi-wrench"></i>
           <span>Pembagian Kelas</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('admin/mutasi_kelas') ?>">
+          <i class="bi bi-arrow-down-up"></i>
+          <span>Mutasi Kelas</span>
         </a>
       </li>
       <li class="nav-item">

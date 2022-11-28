@@ -14,7 +14,7 @@ class SiswaModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['siswa_nisn', 'siswa_nis', 'siswa_nama', 'siswa_jk', 'siswa_tempat_lahir', 'siswa_tgl_lahir', 'siswa_hp', 'siswa_goldarah', 'siswa_alamat', 'siswa_email', 'siswa_masuk', 'siswa_status', 'kelas_id', 'user_id'];
+    protected $allowedFields    = ['siswa_nisn', 'siswa_nis', 'siswa_nama', 'siswa_jk', 'siswa_tempat_lahir', 'siswa_tgl_lahir', 'siswa_hp', 'siswa_goldarah', 'siswa_alamat', 'siswa_email', 'siswa_masuk', 'siswa_status', 'kelas_id', 'user_id', 'siswa_kelastemp'];
 
     // Dates
     protected $useTimestamps = false;
@@ -139,5 +139,27 @@ class SiswaModel extends Model
         $this->join('detailabsensi', 'siswa.siswa_id = detailabsensi.siswa_id AND detailabsensi.absensi_id = ' . $absensi_id, 'left');
         $this->join('absensi', 'absensi.absensi_id = detailabsensi.absensi_id', 'left');
         return $this->findAll();
+    }
+    public function findBelumMutasi($kelas_id)
+    {
+        $this->where('kelas_id', $kelas_id);
+        $this->where('siswa_kelastemp =', null, true);
+        return $this->find();
+    }
+    public function findMutasi($kelas_id = null)
+    {
+        if ($kelas_id != null)
+            $this->where('siswa.kelas_id', $kelas_id);
+        $this->where('siswa_kelastemp is', null, true);
+        $this->join('kelas', 'kelas.kelas_id = siswa.siswa_kelastemp');
+        $this->join('jurusan', 'jurusan.jurusan_id = kelas.jurusan_id');
+        return $this->find();
+    }
+    public function countSiswa($where = null)
+    {
+        $this->select('count(siswa_id) as jumlah');
+        if ($where != null)
+            $this->where($where, true);
+        return $this->first()->jumlah;
     }
 }

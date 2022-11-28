@@ -74,4 +74,25 @@ class KelasModel extends Model
         $this->join('jurusan', 'jurusan.jurusan_id = kelas.jurusan_id');
         return $this->findAll();
     }
+    public function findUnderXII()
+    {
+        $this->where('kelas_tingkat !=', 'XII', true);
+        $this->join('jurusan', 'jurusan.jurusan_id = kelas.jurusan_id');
+        $this->orderBy('kelas_tingkat', 'asc');
+        return $this->findAll();
+    }
+    public function findKelasAtas($kelas_tingkat, $jurusan_id)
+    {
+        $kelas_atas = 'XI';
+        if ($kelas_tingkat == 'XI')
+            $kelas_atas = 'XII';
+        $model = new JurusanModel();
+        $jurusan = $model->find($jurusan_id);
+        $this->where('kelas.kelas_tingkat', $kelas_atas);
+
+        if ($jurusan->jurusan_nama != 'Umum')
+            $this->where('kelas.jurusan_id', $jurusan_id);
+        $this->join('jurusan', 'jurusan.jurusan_id = kelas.jurusan_id');
+        return $this->find();
+    }
 }
