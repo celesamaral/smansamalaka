@@ -443,7 +443,7 @@ class Penilaian extends BaseController
 
         $model = new TahunAjaranModel();
         if ($tahunajaran_id == null) {
-            $tahunajaran = $model->where('tahunajaran_status !=', 'nonaktif', true)->findAll();
+            $tahunajaran = $model->where('tahunajaran_status !=', 'aktif', true)->findAll();
 
             $data = [
                 'title' => 'Pilih Tahun Ajaran',
