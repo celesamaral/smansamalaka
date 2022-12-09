@@ -205,7 +205,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/mutasi_kelas') ?>">
+        <a class="nav-link collapsed" href="<?= base_url('admin/pengumuman') ?>">
           <i class="bi bi-card-list"></i>
           <span>Pengumuman</span>
         </a>

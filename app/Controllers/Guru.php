@@ -86,11 +86,9 @@ class Guru extends BaseController
         $model = new GuruModel();
         $guru = $model->find($guru_id);
         if ($model->update($guru_id, $data)) {
-            if ($guru->guru_nip != $data['guru_nip']) {
-                $model = new UserModel();
-                $user['username'] = $data['guru_nip'];
-                $model->update($guru->user_id, $user);
-            }
+            $model = new UserModel();
+            $user['username'] = $data['guru_nip'];
+            $model->update($guru->user_id, $user);
             return redirect()->to('admin/guru')
                 ->with('message', 'Data berhasil diupdate');
         } else {
