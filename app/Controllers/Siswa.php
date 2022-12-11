@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\KelasModel;
 use App\Models\SiswaModel;
+use Dompdf\Dompdf;
 
 class Siswa extends BaseController
 {
@@ -23,6 +24,26 @@ class Siswa extends BaseController
         ];
         // dd($data_siswa);
         return view('siswa/index', $data);
+    }
+    public function cetakbaru()
+    {
+        $model = new SiswaModel();
+        $data_siswa = $model->getSiswaBaru();
+
+        $model = new KelasModel();
+        $data_kelas = $model->findKelasBaru();
+        $data = [
+            'title' => 'Siswa Baru',
+            'data_siswa' => $data_siswa,
+            'data_kelas' => $data_kelas
+        ];
+        // dd($data_siswa);
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('siswa/cetak_baru', $data));
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream();
+        // return view('siswa/index', $data);
     }
 
     public function detail($siswa_id)
@@ -111,5 +132,20 @@ class Siswa extends BaseController
         ];
 
         return view('siswa/aktif', $data);
+    }
+    public function cetak_aktif()
+    {
+        $model = new SiswaModel();
+        $data_siswa = $model->findAktif();
+        $data = [
+            'title' => 'Siswa Aktif',
+            'data_siswa' => $data_siswa
+        ];
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('siswa/cetak_aktif', $data));
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream();
+        // return view('siswa/cetak_aktif', $data);
     }
 }

@@ -8,6 +8,7 @@ use App\Models\KelasModel;
 use App\Models\SiswaModel;
 use App\Models\UserModel;
 use App\Models\WaliKelasModel;
+use Dompdf\Dompdf;
 
 class Guru extends BaseController
 {
@@ -19,6 +20,18 @@ class Guru extends BaseController
         $data['data_guru'] = $model->findAll();
 
         return view('admin/guru/index', $data);
+    }
+
+    public function cetak()
+    {
+        $model = new GuruModel();
+        $data['title'] = 'Guru';
+        $data['data_guru'] = $model->findAll();
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('admin/guru/cetak', $data));
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream();
     }
 
     public function tambah()

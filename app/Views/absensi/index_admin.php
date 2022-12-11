@@ -47,6 +47,7 @@
                                     <td><?= $absen->absensi_tgl ?></td>
                                     <td>
                                         <?= form_open('admin/absensi/hapus') ?>
+                                        <a href="<?= base_url('admin/absensi/' . $absen->absensi_id) ?>" class="badge bg-info">Lihat Absensi</a>
                                         <input type="hidden" name="absensi_id" value="<?= $absen->absensi_id ?>">
                                         <button class="badge bg-danger border" onclick="return confirm('Apakah anda yakin menghapus data ini')">Hapus</button>
                                         </form>

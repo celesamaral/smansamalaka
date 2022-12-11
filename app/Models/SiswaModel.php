@@ -140,6 +140,14 @@ class SiswaModel extends Model
         $this->join('absensi', 'absensi.absensi_id = detailabsensi.absensi_id', 'left');
         return $this->findAll();
     }
+    public function findAbsensiMapel($absensimapel_id, $kelas_id)
+    {
+        $this->select('siswa.siswa_id as siswaId, siswa.siswa_nama, detailabsensimapel.*, absensimapel.*');
+        $this->where('siswa.kelas_id', $kelas_id);
+        $this->join('detailabsensimapel', 'siswa.siswa_id = detailabsensimapel.siswa_id AND detailabsensimapel.absensimapel_id = ' . $absensimapel_id, 'left');
+        $this->join('absensimapel', 'absensimapel.absensimapel_id = detailabsensimapel.absensimapel_id', 'left');
+        return $this->findAll();
+    }
     public function findBelumMutasi($kelas_id)
     {
         $this->where('kelas_id', $kelas_id);

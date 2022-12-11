@@ -26,7 +26,8 @@
                 <div class="card-body">
                     <h5 class="card-title">Daftar Guru SMAN 1 Malaka</h5>
                     <div class="d-flex justify-content-end">
-                        <a href="<?= base_url('admin/guru/tambah') ?>" class="btn btn-primary"><i class="bi bi-plus"></i>Tambah</a>
+                        <a href="<?= base_url('admin/guru/tambah') ?>" class="btn btn-primary mr-2 ml-2 m-2"><i class="bi bi-plus"></i>Tambah</a>
+                        <a href="<?= base_url('admin/guru/cetak') ?>" class="btn btn-warning ml-2 mr-2 m-2"><i class="bi bi-printer"></i> Cetak</a>
                     </div>
                     <table class="table table-bordered datatable">
                         <thead>

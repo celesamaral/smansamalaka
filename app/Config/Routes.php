@@ -40,12 +40,16 @@ $routes->group('admin', ['filter' => 'adminFilter'], static function ($routes) {
     $routes->post('jurusan/update', 'Kelas::update_jurusan');
     $routes->post('jurusan/hapus', 'Kelas::hapus_jurusan');
     $routes->get('jurusan/(:any)/kelas', 'Kelas::kelas_jurusan/$1');
+
     $routes->get('kelas', 'Kelas::kelas');
+    $routes->get('kelas/cetak', 'Kelas::cetak_kelas');
     $routes->post('kelas/store', 'Kelas::store_kelas');
     $routes->get('kelas/(:any)/edit', 'Kelas::edit_kelas/$1');
     $routes->post('kelas/update', 'Kelas::update_kelas');
     $routes->post('kelas/hapus', 'Kelas::hapus_kelas');
+
     $routes->get('mapel', 'Mapel::index');
+    $routes->get('mapel/cetak', 'Mapel::cetak');
     $routes->post('mapel/store', 'Mapel::store_mapel');
     $routes->post('mapel/update', 'Mapel::update_mapel');
     $routes->post('mapel/hapus', 'Mapel::hapus_mapel');
@@ -58,10 +62,15 @@ $routes->group('admin', ['filter' => 'adminFilter'], static function ($routes) {
 
     $routes->get('jadwal', 'Jadwal::index');
     $routes->get('jadwal/(:num)', 'Jadwal::index/$1');
+    $routes->get('jadwal/(:num)/cetak', 'Jadwal::cetak/$1');
     $routes->post('jadwal/store', 'Jadwal::store');
+    $routes->post('jadwal/update', 'Jadwal::update');
+    $routes->post('jadwal/hapus', 'Jadwal::hapus');
 
     $routes->get('siswa/baru', 'Siswa::index');
+    $routes->get('siswa/baru/cetak', 'Siswa::cetak_baru');
     $routes->get('siswa/aktif', 'Siswa::siswa_aktif');
+    $routes->get('siswa/aktif/cetak', 'Siswa::cetak_aktif');
     $routes->get('siswa/(:any)/edit', 'Siswa::edit/$1');
     $routes->get('siswa/(:any)', 'Siswa::detail/$1');
     $routes->post('siswa/store', 'Siswa::store');
@@ -89,6 +98,9 @@ $routes->group('admin', ['filter' => 'adminFilter'], static function ($routes) {
     $routes->post('ganti_password', 'Profil::ganti_password');
 
     $routes->get('absensi', 'Absensi::index');
+    $routes->get('absensi/(:num)', 'Absensi::daftar_kelas/$1');
+    $routes->get('absensi/(:num)/(:num)', 'Absensi::absensi_kelas/$1/$2');
+    $routes->get('absensi/(:num)/(:num)/cetak', 'Absensi::cetak_absensi_kelas/$1/$2');
     $routes->post('absensi/store', 'Absensi::store');
     $routes->post('absensi/hapus', 'Absensi::hapus');
 
@@ -98,6 +110,10 @@ $routes->group('admin', ['filter' => 'adminFilter'], static function ($routes) {
     $routes->post('mutasi_kelas/sementara', 'Kelas::mutasi_sementara');
     $routes->post('mutasi_kelas/cancel', 'Kelas::cancel_mutasi');
     $routes->post('mutasi_kelas/store_all', 'Kelas::store_mutasi');
+
+    $routes->get('nilaisiswa', 'Penilaian::daftar_siswa');
+    $routes->get('nilaisiswa/(:num)', 'Penilaian::rekapan_siswa/$1');
+    $routes->post('nilai/cetak', 'Penilaian::cetak_nilai');
 });
 
 $routes->group('admin/admin', ['filter' => 'adminFilter'], static function ($routes) {
@@ -110,6 +126,7 @@ $routes->group('admin/guru', ['filter' => 'adminFilter'], static function ($rout
     $routes->get('tambah', 'Guru::tambah');
     $routes->post('store_guru', 'Guru::store_guru');
     $routes->post('update', 'Guru::update');
+    $routes->get('cetak', 'Guru::cetak');
     $routes->post('hapus', 'Guru::hapus');
     $routes->get('edit/(:any)', 'Guru::edit/$1');
     $routes->get('/', 'Guru::index');
@@ -128,12 +145,14 @@ $routes->group('guru', ['filter' => 'guruFilter'], static function ($routes) {
         $routes->post('/', 'Penilaian::penilaian');
         $routes->get('(:num)/(:num)', 'Penilaian::kelas/$1/$2');
         $routes->get('(:num)/(:num)/rekapan', 'Penilaian::rekapan/$1/$2');
+        $routes->get('(:num)/(:num)/cetak', 'Penilaian::cetak_rekapan/$1/$2');
         $routes->post('store', 'Penilaian::store');
         $routes->post('get_nilai', 'Penilaian::get_nilaii');
     });
     $routes->get('pengumuman/', 'Pengumuman::index');
     $routes->get('jadwal', 'Jadwal::jadwal_guru');
     $routes->get('jadwal', 'Jadwal::jadwal_guru');
+    $routes->get('jadwal/cetak', 'Jadwal::cetak_jadwal_guru');
     $routes->get('walikelas', 'Guru::wali_kelas');
     $routes->get('walikelas/nilai/(:any)', 'Penilaian::rekapan_siswa/$1');
     $routes->get('walikelas/(:any)', 'Guru::wali_kelas/$1');
@@ -145,6 +164,15 @@ $routes->group('guru', ['filter' => 'guruFilter'], static function ($routes) {
     $routes->get('absensi', 'Absensi::index_guru');
     $routes->get('absensi/(:any)', 'Absensi::detail/$1');
     $routes->post('absensi/absen', 'Absensi::absen');
+
+    $routes->get('absensimapel', 'Absensi::absensimapel_kelas');
+    $routes->get('absensimapel/detail/(:num)', 'Absensi::detail_mapel/$1');
+    $routes->get('absensimapel/cetak/(:num)', 'Absensi::cetak_detail_mapel/$1');
+    $routes->get('absensimapel/(:num)/(:num)', 'Absensi::absensimapel_index/$1/$2');
+    $routes->get('absensimapel/(:num)/(:num)/rekap', 'Absensi::absensimapel_rekap/$1/$2');
+    $routes->get('absensimapel/(:num)/(:num)/cetak', 'Absensi::cetak_absensimapel_rekap/$1/$2');
+    $routes->post('absensimapel/store', 'Absensi::store_absensimapel', ['filter' => 'tahunAjaranFilter']);
+    $routes->post('absensimapel/absen', 'Absensi::absensimapel_absen', ['filter' => 'tahunAjaranFilter']);
 });
 
 $routes->group('siswa', ['filter' => 'siswaFilter'], static function ($routes) {
@@ -154,6 +182,7 @@ $routes->group('siswa', ['filter' => 'siswaFilter'], static function ($routes) {
     $routes->get('riwayat_nilai/(:any)', 'Penilaian::riwayat_nilai/$1');
     $routes->get('pengumuman/', 'Pengumuman::index');
     $routes->get('jadwal/', 'Jadwal::jadwal_kelas');
+    $routes->get('jadwal/cetak', 'Jadwal::cetak_jadwal_kelas');
     $routes->post('nilai/cetak', 'Penilaian::cetak_nilai');
     $routes->get('profil', 'Profil::profil_siswa');
     $routes->post('ganti_password', 'Profil::ganti_password');

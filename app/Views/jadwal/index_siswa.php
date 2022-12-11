@@ -22,6 +22,9 @@
                     <p><?= session('message') ?></p>
                 </div>
             <?php endif; ?>
+            <a href="<?= base_url('siswa/jadwal/cetak') ?>" class="btn btn-warning btn-sm ml-2 mr-2 m-1"><i class="bi bi-printer"></i>
+                Cetak
+            </a>
             <?php foreach ($data_hari as $hari) : ?>
                 <?php if (!empty($hari->jadwal)) : ?>
                     <div class="card">

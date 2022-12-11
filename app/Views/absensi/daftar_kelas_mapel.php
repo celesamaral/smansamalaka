@@ -1,4 +1,4 @@
-<?= $this->extend('layout_admin'); ?>
+<?= $this->extend('layout_guru'); ?>
 <?= $this->section('title'); ?>
 <?= $title ?>
 <?= $this->endSection(); ?>
@@ -24,34 +24,23 @@
             <?php endif; ?>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Daftar Siswa</h5>
-                    <a href="<?= base_url('admin/siswa/aktif/cetak') ?>" class="btn btn-warning btn-sm m-2">
-                        <i class="bi bi-printer"></i> Cetak</a>
+                    <h5 class="card-title">Daftar Mata Pelajaran dan Kelas</h5>
                     <!-- End Tooltips Examples -->
                     <table class="table datatable">
                         <thead>
                             <tr>
-                                <th>NISN</th>
-                                <th>NIS</th>
-                                <th>Nama</th>
-                                <th>JK</th>
                                 <th>Kelas</th>
+                                <th>Mapel</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($data_siswa as $siswa) : ?>
+                            <?php foreach ($data_kelas as $kelas) : ?>
                                 <tr>
-                                    <td><?= $siswa->siswa_nisn ?></td>
-                                    <td><?= $siswa->siswa_nis ?></td>
-                                    <td><?= $siswa->siswa_nama ?></td>
-                                    <td><?= $siswa->siswa_jk ?></td>
-                                    <td><?= $siswa->kelas_tingkat ?> <?= $siswa->jurusan_nama ?> <?= $siswa->kelas_abjad ?></td>
+                                    <td><?= $kelas->kelas_tingkat ?> <?= $kelas->jurusan_nama ?> <?= $kelas->kelas_abjad ?></td>
+                                    <td><?= $kelas->mapel_nama ?></td>
                                     <td>
-                                        <a href="<?= base_url('admin/siswa/' . $siswa->siswa_id) ?>" class="badge bg-dark mr-2">detail</a>
-                                        <a href="<?= base_url('admin/siswa/' . $siswa->siswa_id . '/edit') ?>" class="badge bg-secondary mr-2">edit</a>
-                                        <input type="hidden" name="siswa_id" value="<?= $siswa->siswa_id ?>" class="d-none">
-                                        <!-- <button type="submit" class="badge bg-danger border">hapus</button> -->
+                                        <a href="<?= base_url('guru/absensimapel/' . $kelas->mapel_id . '/' . $kelas->kelas_id) ?>" class="badge bg-secondary">Data Absensi</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

@@ -35,6 +35,14 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+  <style>
+    .logo-ntt {
+      /* width: 100%; */
+      background-image: url('<?= base_url('assets/img/logo-ntt.png') ?>');
+      width: 10px;
+      height: 20px;
+    }
+  </style>
 </head>
 
 <body>
@@ -176,69 +184,89 @@
           </li>
         </ul>
       </li>
-
       <li class="nav-heading">Data</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#master-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-gear-wide-connected"></i><span>Data Master</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="master-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="<?= base_url('admin/jurusan') ?>">
+              <i class="bi bi-diagram-3"></i>
+              <span>Jurusan</span>
+            </a>
+          </li><!-- End Profile Page Nav -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="<?= base_url('admin/kelas') ?>">
+              <i class="bi bi-diagram-3-fill"></i>
+              <span>Kelas</span>
+            </a>
+          </li><!-- End F.A.Q Page Nav -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="<?= base_url('admin/walikelas') ?>">
+              <i class="bi bi-diagram-3-fill"></i>
+              <span>Wali Kelas</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="<?= base_url('admin/mapel') ?>">
+              <i class="bi bi-stack"></i>
+              <span>Mata Pelajaran</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="<?= base_url('admin/pengumuman') ?>">
+              <i class="bi bi-card-list"></i>
+              <span>Pengumuman</span>
+            </a>
+          </li>
+        </ul>
+      </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/jurusan') ?>">
-          <i class="bi bi-diagram-3"></i>
-          <span>Jurusan</span>
+        <a class="nav-link collapsed" data-bs-target="#akademik-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-book-half"></i><span>Kelola Akademik</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-      </li><!-- End Profile Page Nav -->
+        <ul id="akademik-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="<?= base_url('admin/pembagian_kelas') ?>">
+              <i class="bi bi-wrench"></i>
+              <span>Pembagian Kelas</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="<?= base_url('admin/mutasi_kelas') ?>">
+              <i class="bi bi-arrow-down-up"></i>
+              <span>Mutasi Kelas</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="<?= base_url('admin/tahunajaran') ?>">
+              <i class="bi bi-calendar-week"></i>
+              <span>Tahun Ajaran</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="<?= base_url('admin/jadwal') ?>">
+              <i class="bi bi-card-list"></i>
+              <span>Jadwal Pelajaran</span>
+            </a>
+          </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/kelas') ?>">
-          <i class="bi bi-diagram-3-fill"></i>
-          <span>Kelas</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/walikelas') ?>">
-          <i class="bi bi-diagram-3-fill"></i>
-          <span>Wali Kelas</span>
-        </a>
+        </ul>
       </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/mapel') ?>">
-          <i class="bi bi-stack"></i>
-          <span>Mata Pelajaran</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/pengumuman') ?>">
-          <i class="bi bi-card-list"></i>
-          <span>Pengumuman</span>
-        </a>
-      </li>
-      <li class="nav-heading">Akademik</li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/pembagian_kelas') ?>">
-          <i class="bi bi-wrench"></i>
-          <span>Pembagian Kelas</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/mutasi_kelas') ?>">
-          <i class="bi bi-arrow-down-up"></i>
-          <span>Mutasi Kelas</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/tahunajaran') ?>">
-          <i class="bi bi-calendar-week"></i>
-          <span>Tahun Ajaran</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/jadwal') ?>">
-          <i class="bi bi-card-list"></i>
-          <span>Jadwal Pelajaran</span>
-        </a>
-      </li>
+
+      <li class="nav-heading">Proses Akademik</li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="<?= base_url('admin/absensi') ?>">
-          <i class="bi bi-card-list"></i>
+          <i class="bi bi-clipboard"></i>
           <span>Absensi</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('admin/nilaisiswa') ?>">
+          <i class="bi bi-clipboard"></i>
+          <span>Nilai</span>
         </a>
       </li>
     </ul>

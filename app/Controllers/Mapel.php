@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\GuruModel;
 use App\Models\MapelModel;
 use App\Models\KdModel;
+use Dompdf\Dompdf;
 
 class Mapel extends BaseController
 {
@@ -23,6 +24,24 @@ class Mapel extends BaseController
         ];
 
         return view('admin/mapel/index', $data);
+    }
+    public function cetak()
+    {
+        helper('form');
+        $model = new MapelModel();
+        $data_mapel = $model->findMapel();
+        $model = new GuruModel();
+        $data_guru = $model->findAll();
+        $data = [
+            'title' => 'Mata Pelajaran',
+            'data_mapel' => $data_mapel,
+            'data_guru' => $data_guru
+        ];
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('admin/mapel/cetak', $data));
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream();
     }
 
     public function index_guru()

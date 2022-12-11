@@ -1,9 +1,29 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
+    <title>Welcome to CodeIgniter</title>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Welcome to CodeIgniter!</h1>
+        <div id="body">
+            <p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+        </div>
+    </div>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en"> -->
+
+<head>
+    <meta charset="utf-8">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link href="http://localhost/smansamalaka/public/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -28,47 +48,33 @@
         </table>
         <hr>
         <center>
-            <h4 class="text-align-center">HASIL BELAJAR SISWA</h4>
+            <h4 class="text-align-center">JADWAL MENGAJAR</h4>
         </center>
-        <p>Nama : <?= $siswa->siswa_nama ?></p>
-        <p>Tahun Ajaran : <?= $tahunajaran->tahunajaran_tahun ?></p>
-        <p>Semester : <?= $tahunajaran->tahunajaran_semester ?></p>
         <!-- End Tooltips Examples -->
+
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Mata Pelajaran</th>
-                    <th>KD 1</th>
-                    <th>KD 2</th>
-                    <th>KD 3</th>
-                    <th>KD 4</th>
-                    <th>UTS</th>
-                    <th>UAS</th>
-                    <th>Nilai Akhir</th>
+                    <th>Kelas</th>
+                    <th>Hari</th>
+                    <th>Waktu</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data_mapel as $mapel) : ?>
+                <?php foreach ($data_jadwal as $jadwal) : ?>
                     <tr>
-                        <td><?= $mapel->mapel_nama ?></td>
-                        <?php foreach ($mapel->nilai as $nilai) : ?>
-                            <?php $nilai_kd = 0;
-                            $nilai_kd += ($nilai->tugas1 + $nilai->tugas2 + $nilai->ulangan1 + $nilai->ulangan2) / 4;
-                            ?>
-                            <td><?= $nilai_kd ?></td>
-                        <?php endforeach; ?>
-                        <td><?= $mapel->uts ?></td>
-                        <td><?= $mapel->uas ?></td>
-                        <td><?= $mapel->akhir ?></td>
-
+                        <td><?= $jadwal->mapel_nama ?></td>
+                        <td><?= $jadwal->kelas_tingkat ?> <?= $jadwal->jurusan_nama ?> <?= $jadwal->kelas_abjad ?></td>
+                        <td><?= $jadwal->jadwal_hari ?></td>
+                        <td><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
                     </tr>
-
                 <?php endforeach; ?>
             </tbody>
         </table>
-
-
     </div>
+
+
 </body>
 
 </html>

@@ -11,6 +11,7 @@ use App\Models\NilaisiswaModel;
 use App\Models\SiswaModel;
 use App\Models\TahunAjaranModel;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Penilaian extends BaseController
 {
@@ -202,7 +203,19 @@ class Penilaian extends BaseController
             echo json_encode($out);
         }
     }
+    public function daftar_siswa()
+    {
+        helper('form');
+        $model = new SiswaModel();
+        $data_siswa = $model->findAktif();
 
+        $data = [
+            'title' => 'Nilai Siswa Aktif',
+            'data_siswa' => $data_siswa
+        ];
+
+        return view('admin/nilai/daftar_siswa', $data);
+    }
     public function rekapan($kelas_id, $mapel_id)
     {
         helper('form');
@@ -263,6 +276,71 @@ class Penilaian extends BaseController
             // dd('halo');
         }
     }
+    public function cetak_rekapan($kelas_id, $mapel_id)
+    {
+        $guru_id = session('guru')->guru_id;
+
+        $model = new MapelModel();
+        $mapel = $model->find($mapel_id);
+
+        $model = new KelasModel();
+        $kelas = $model->findSingle($kelas_id);
+
+        if (!empty($mapel) && $mapel->guru_id == $guru_id) {
+            $model = new TahunAjaranModel();
+            $tahunajaran = $model->where('tahunajaran_status', 'aktif')->first();
+            if (!empty($tahunajaran)) {
+                $model = new KdModel();
+                $data_kd = $model->getKDOnly($mapel_id);
+                $uts = $model->getUTS($mapel_id);
+                $uas = $model->getUAS($mapel_id);
+                $akhir = $model->getNilaiAkhir($mapel->mapel_id);
+                $nilai_uas = 0;
+                $nilai_uts = 0;
+                $nilai_akhir = 0;
+                $model = new SiswaModel();
+                $data_siswa = $model->where('kelas_id', $kelas_id)->find();
+
+                foreach ($data_siswa as $i => $siswa) {
+                    $model = new NilaisiswaModel();
+                    if (!empty($uas)) {
+                        $nilai_uas = $model->getNilai($siswa->siswa_id, $uas->kd_id, $tahunajaran->tahunajaran_id);
+                    }
+                    if (!empty($uts)) {
+                        $nilai_uts = $model->getNilai($siswa->siswa_id, $uts->kd_id, $tahunajaran->tahunajaran_id);
+                    }
+                    if (!empty($akhir)) {
+                        $nilai_akhir = $model->getNilai($siswa->siswa_id, $akhir->kd_id, $tahunajaran->tahunajaran_id);
+                    }
+                    foreach ($data_kd as $j => $kd) {
+                        $nilaisiswa = $model->getNilaiSiswa($siswa->siswa_id, $kd->kd_id, $tahunajaran->tahunajaran_id);
+                        $data_siswa[$i]->nilai[$j] = $nilaisiswa;
+                    }
+
+
+                    $data_siswa[$i]->akhir = $nilai_akhir;
+                    $data_siswa[$i]->uas = $nilai_uas;
+                    $data_siswa[$i]->uts = $nilai_uts;
+                }
+
+                $data = [
+                    'title' => 'Rekapan Penilaian',
+                    'mapel' => $mapel,
+                    'data_kd' => $data_kd,
+                    'data_siswa' => $data_siswa,
+                    'kelas' => $kelas
+                ];
+                $options = new Options();
+                $options->set('isRemoteEnabled', true);
+                $dompdf = new Dompdf($options);
+                $dompdf->loadHtml(view('guru/penilaian/cetak_rekapan', $data));
+                $dompdf->setPaper('A4', 'portrait');
+                $dompdf->render();
+                $dompdf->stream();
+            }
+            // dd('halo');
+        }
+    }
     public function hitung_nilai()
     {
         $kelas_id = $this->request->getPost('kelas_id');
@@ -302,9 +380,9 @@ class Penilaian extends BaseController
 
                     foreach ($data_kd as $j => $kd) {
                         $nilaisiswa = $model->getNilaiSiswa($siswa->siswa_id, $kd->kd_id, $tahunajaran->tahunajaran_id);
-                        $nilai_kd += ($nilaisiswa->tugas1 + $nilaisiswa->tugas2 + $nilaisiswa->ulangan1 + $nilaisiswa->ulangan2);
+                        $nilai_kd += ($nilaisiswa->tugas1 + $nilaisiswa->tugas2 + $nilaisiswa->ulangan1 + $nilaisiswa->ulangan2) / 4;
                     }
-                    $nilai_kd = $nilai_kd / 4;
+                    $nilai_kd = ($nilai_kd / 4);
                     $total = ($nilai_kd + $nilai_uts + $nilai_uas) / 3;
 
                     $data = [
@@ -386,6 +464,8 @@ class Penilaian extends BaseController
     public function cetak_nilai()
     {
         $siswa_id = $this->request->getPost('siswa_id');
+        $model = new SiswaModel();
+        $siswa = $model->find($siswa_id);
         $model = new TahunAjaranModel();
         $tahunajaran = $model->where('tahunajaran_status', 'aktif')->first();
         $model = new MapelModel();
@@ -423,11 +503,13 @@ class Penilaian extends BaseController
         }
         // dd($data_mapel);
         $data = [
-            'title' => 'Rekapan Penilaian Siswa',
             'data_mapel' => $data_mapel,
-            'tahunajaran' => $tahunajaran
+            'tahunajaran' => $tahunajaran,
+            'siswa' => $siswa
         ];
-        $dompdf = new Dompdf();
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
         $dompdf->loadHtml(view('nilai/cetak_nilai', $data));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();

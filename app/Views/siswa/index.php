@@ -30,6 +30,8 @@
                         <i class="bi bi-plus"></i>
                         Tambah Siswa
                     </button>
+                    <a href="<?= base_url('admin/siswa/baru/cetak') ?>" class="btn btn-warning btn-sm m-2">
+                        <i class="bi bi-printer"></i> Cetak</a>
                     <table class="table datatable">
                         <thead>
                             <tr>

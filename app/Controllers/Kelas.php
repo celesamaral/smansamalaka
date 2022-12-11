@@ -7,6 +7,8 @@ use App\Models\KelasModel;
 use App\Models\JurusanModel;
 use App\Models\SiswaModel;
 use App\Models\UserModel;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Kelas extends BaseController
 {
@@ -88,6 +90,22 @@ class Kelas extends BaseController
         ];
 
         return view('admin/kelas/index', $data);
+    }
+    public function cetak_kelas()
+    {
+        $model = new KelasModel();
+        $data_kelas = $model->findKelas();
+        $data = [
+            'title' => 'Kelas',
+            'data_kelas' => $data_kelas,
+        ];
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml(view('admin/kelas/cetak_kelas', $data));
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream();
     }
 
     public function kelas_jurusan($jurusan_id)

@@ -27,10 +27,13 @@
                     <h5 class="card-title">Daftar Kelas</h5>
                     <div class="d-flex justify-content-end mb-4">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#form">
+                        <button type="button" class="btn btn-primary btn-sm m-1" data-bs-toggle="modal" data-bs-target="#form">
                             <i class="bi bi-plus"></i>
                             Tambah Kelas
                         </button>
+                        <a href="<?= base_url('admin/kelas/cetak') ?>" class="btn btn-warning ml-2 mr-2 m-1"><i class="bi bi-printer"></i>
+                            Cetak
+                        </a>
 
                         <!-- Modal -->
 

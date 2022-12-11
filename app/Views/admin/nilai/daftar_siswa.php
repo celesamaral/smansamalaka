@@ -24,34 +24,27 @@
             <?php endif; ?>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Daftar Siswa</h5>
-                    <a href="<?= base_url('admin/siswa/aktif/cetak') ?>" class="btn btn-warning btn-sm m-2">
-                        <i class="bi bi-printer"></i> Cetak</a>
+                    <h5 class="card-title">Tabel Daftar Siswa</h5>
                     <!-- End Tooltips Examples -->
+                    <!-- <button type="button" class="btn btn-primary btn-sm m-2" data-bs-toggle="modal" data-bs-target="#print">
+                        <i class="bi bi-printer"></i>
+                        Cetak Banyak
+                    </button> -->
                     <table class="table datatable">
                         <thead>
                             <tr>
-                                <th>NISN</th>
-                                <th>NIS</th>
-                                <th>Nama</th>
-                                <th>JK</th>
-                                <th>Kelas</th>
-                                <th>Actions</th>
+                                <th>No. Induk</th>
+                                <th>Nama Siswa</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($data_siswa as $siswa) : ?>
                                 <tr>
-                                    <td><?= $siswa->siswa_nisn ?></td>
                                     <td><?= $siswa->siswa_nis ?></td>
                                     <td><?= $siswa->siswa_nama ?></td>
-                                    <td><?= $siswa->siswa_jk ?></td>
-                                    <td><?= $siswa->kelas_tingkat ?> <?= $siswa->jurusan_nama ?> <?= $siswa->kelas_abjad ?></td>
                                     <td>
-                                        <a href="<?= base_url('admin/siswa/' . $siswa->siswa_id) ?>" class="badge bg-dark mr-2">detail</a>
-                                        <a href="<?= base_url('admin/siswa/' . $siswa->siswa_id . '/edit') ?>" class="badge bg-secondary mr-2">edit</a>
-                                        <input type="hidden" name="siswa_id" value="<?= $siswa->siswa_id ?>" class="d-none">
-                                        <!-- <button type="submit" class="badge bg-danger border">hapus</button> -->
+                                        <a href="<?= base_url('admin/nilaisiswa/' . $siswa->siswa_id) ?>" class="badge bg-dark">Lihat Nilai</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -64,4 +57,22 @@
 
     </div>
 </section>
+<!-- <div class="modal fade" id="print" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Form Cetak</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <?= form_open('guru/kd/store') ?>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div> -->
 <?= $this->endSection(); ?>

@@ -50,6 +50,8 @@ class KelasModel extends Model
             $this->where('kelas.jurusan_id', $jurusan_id);
         $this->where('kelas.kelas_tingkat !=', 'umum');
         $this->join('jurusan', 'jurusan.jurusan_id = kelas.jurusan_id');
+        $this->join('walikelas', 'walikelas.kelas_id = kelas.kelas_id', 'left');
+        $this->join('guru', 'guru.guru_id = walikelas.guru_id', 'left');
         return $this->findAll();
     }
     public function findSingle($kelas_id)

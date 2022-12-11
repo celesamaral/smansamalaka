@@ -67,4 +67,11 @@ class AbsensiModel extends Model
         $query = $this->db->query($sql);
         return $query->getResultObject();
     }
+    public function findSingleAbsenSiswa($siswa_id, $absensi_id)
+    {
+        $sql = "SELECT DISTINCT absensi.tahunajaran_id, tahunajaran.tahunajaran_tahun, tahunajaran.tahunajaran_semester, (SELECT COUNT(detailabsensi.detailabsensi_id) FROM detailabsensi, absensi WHERE detailabsensi.absensi_id = absensi.absensi_id AND detailabsensi.detailabsensi_kehadiran = 'H' AND detailabsensi.siswa_id = '$siswa_id' GROUP BY absensi.tahunajaran_id) as H, (SELECT COUNT(detailabsensi.detailabsensi_id) FROM detailabsensi, absensi WHERE detailabsensi.absensi_id = absensi.absensi_id AND detailabsensi.detailabsensi_kehadiran = 'S' AND detailabsensi.siswa_id = '$siswa_id' GROUP BY absensi.tahunajaran_id) as S, (SELECT COUNT(detailabsensi.detailabsensi_id) FROM detailabsensi, absensi WHERE detailabsensi.absensi_id = absensi.absensi_id AND detailabsensi.detailabsensi_kehadiran = 'I' AND detailabsensi.siswa_id = '$siswa_id' GROUP BY absensi.tahunajaran_id) as I, (SELECT COUNT(detailabsensi.detailabsensi_id) FROM detailabsensi, absensi WHERE detailabsensi.absensi_id = absensi.absensi_id AND detailabsensi.detailabsensi_kehadiran = 'A' AND detailabsensi.siswa_id = '$siswa_id' GROUP BY absensi.tahunajaran_id) as A FROM absensi join tahunajaran on tahunajaran.tahunajaran_id = absensi.tahunajaran_id where EXISTS (SELECT * FROM detailabsensi WHERE detailabsensi.absensi_id = absensi.absensi_id AND detailabsensi.siswa_id = '$siswa_id') AND detailabsensi.absensi_id = '$absensi_id'";
+
+        $query = $this->db->query($sql);
+        return $query->getRowObject();
+    }
 }

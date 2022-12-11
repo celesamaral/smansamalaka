@@ -27,10 +27,13 @@
                     <h5 class="card-title">Tabel Jadwal Pelajaran</h5>
                     <!-- End Tooltips Examples -->
 
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#form">
+                    <button type="button" class="btn btn-primary btn-sm m-1" data-bs-toggle="modal" data-bs-target="#form">
                         <i class="bi bi-plus"></i>
                         Buat Jadwal
                     </button>
+                    <a href="<?= base_url('admin/jadwal/' . $kelas->kelas_id . '/cetak') ?>" class="btn btn-warning btn-sm ml-2 mr-2 m-1"><i class="bi bi-printer"></i>
+                        Cetak
+                    </a>
                     <table class="table datatable">
                         <thead>
                             <tr>
@@ -49,7 +52,7 @@
                                     <td><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
                                     <td><?= $jadwal->mapel_nama ?></td>
                                     <td>
-                                        <?= form_open('admin/jadwal/store') ?>
+                                        <?= form_open('admin/jadwal/hapus') ?>
                                         <!-- tombol edit -->
                                         <button type="button" class="badge bg-secondary border" data-bs-toggle="modal" data-bs-target="#form<?= $jadwal->jadwal_id ?>">
                                             edit
@@ -60,6 +63,91 @@
                                         </form>
                                     </td>
                                 </tr>
+                                <div class="modal fade" id="form<?= $jadwal->jadwal_id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Form Siswa</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <?= form_open('admin/jadwal/update') ?>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="kelas_id" value="<?= $kelas->kelas_id ?>">
+                                                <input type="hidden" name="jadwal_id" value="<?= $jadwal->jadwal_id ?>">
+                                                <div class="form-group mb-4">
+                                                    <label for="jadwal_hari">Hari</label>
+                                                    <select class="form-select <?= (isset(session('errors')['jadwal_hari'])) ? 'is-invalid' : '' ?>" id="jadwal_hari" name="jadwal_hari">
+                                                        <option value="">Pilih Hari</option>
+                                                        <?php foreach ($hari as $h) : ?>
+                                                            <option value="<?= $h->hari_nama ?>" <?= set_select('jadwal_hari', $h->hari_nama, ($jadwal->jadwal_hari == $h->hari_nama)) ?>><?= $h->hari_nama ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        <?php if (isset(session('errors')['jadwal_hari'])) : ?>
+                                                            <?= session('errors')['jadwal_hari'] ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mb-4">
+                                                    <label for="jadwal_jenis">Jenis</label>
+                                                    <select class="form-select <?= (isset(session('errors')['jadwal_jenis'])) ? 'is-invalid' : '' ?>" id="jadwal_jenis" name="jadwal_jenis">
+                                                        <option value=""></option>
+                                                        <option value="Pelajaran" <?= set_select('jadwal_jenis', 'Pelajaran', ($jadwal->jadwal_jenis == 'Pelajaran')) ?>>Pelajaran</option>
+                                                        <option value="Istirahat" <?= set_select('jadwal_jenis', 'Istirahat', ($jadwal->jadwal_jenis == 'Istirahat')) ?>>Istirahat</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        <?php if (isset(session('errors')['jadwal_jenis'])) : ?>
+                                                            <?= session('errors')['jadwal_jenis'] ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                                <div id="pelajaran">
+                                                    <div class="form-group mb-4">
+                                                        <label for="mapel_id">Mata Pelajaran</label>
+                                                        <select class="form-select <?= (isset(session('errors')['mapel_id'])) ? 'is-invalid' : '' ?>" id="mapel_id" name="mapel_id" required>
+                                                            <option value="">Pilih Mata Pelajaran</option>
+                                                            <?php foreach ($data_mapel as $mapel) : ?>
+                                                                <option value="<?= $mapel->mapel_id ?>" <?= set_select('mapel_id', $mapel->mapel_id, ($jadwal->mapel_id == $mapel->mapel_id)) ?>><?= $mapel->mapel_nama ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            <?php if (isset(session('errors')['mapel_id'])) : ?>
+                                                                <?= session('errors')['mapel_id'] ?>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mb-4">
+                                                    <label for="jadwal_mulai">Waktu Mulai</label>
+                                                    <input type="time" class="form-control <?= (isset(session('errors')['jadwal_mulai'])) ? 'is-invalid' : '' ?>" id="jadwal_mulai" name="jadwal_mulai" value="<?= $jadwal->jadwal_mulai ?>">
+                                                    <div class="invalid-feedback">
+                                                        <?php if (isset(session('errors')['jadwal_mulai'])) : ?>
+                                                            <?= session('errors')['jadwal_mulai'] ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mb-4">
+                                                    <label for="jadwal_selesai">Waktu Selesai</label>
+                                                    <input type="time" class="form-control <?= (isset(session('errors')['jadwal_selesai'])) ? 'is-invalid' : '' ?>" id="jadwal_selesai" name="jadwal_selesai" value="<?= $jadwal->jadwal_selesai ?>">
+                                                    <div class="invalid-feedback">
+                                                        <?php if (isset(session('errors')['jadwal_selesai'])) : ?>
+                                                            <?= session('errors')['jadwal_selesai'] ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

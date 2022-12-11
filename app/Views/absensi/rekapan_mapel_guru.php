@@ -5,13 +5,6 @@
 <?= $this->section('content'); ?>
 <div class="pagetitle">
     <h1><?= $title ?></h1>
-    <!-- <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item">Components</li>
-            <li class="breadcrumb-item active">Tooltips</li>
-        </ol>
-    </nav> -->
 </div><!-- End Page Title -->
 
 <section class="section">
@@ -24,27 +17,29 @@
             <?php endif; ?>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Tabel Jadwal Mengajar Guru</h5>
+                    <h5 class="card-title">Rekapan Absensi Mata Pelajaran <?= $mapel->mapel_nama ?> Kelas <?= $kelas->kelas_tingkat ?> <?= $kelas->jurusan_nama ?> <?= $kelas->kelas_abjad ?></h5>
                     <!-- End Tooltips Examples -->
-                    <a href="<?= base_url('guru/jadwal/cetak') ?>" class="btn btn-warning btn-sm ml-2 mr-2 m-1"><i class="bi bi-printer"></i>
+                    <a href="<?= base_url('guru/absensimapel/' . $mapel->mapel_id . '/' . $kelas->kelas_id . '/cetak') ?>" class="btn btn-warning btn-sm ml-2 mr-2 m-1"><i class="bi bi-printer"></i>
                         Cetak
                     </a>
                     <table class="table datatable">
                         <thead>
                             <tr>
-                                <th>Mata Pelajaran</th>
-                                <th>Kelas</th>
-                                <th>Hari</th>
-                                <th>Waktu</th>
+                                <th>Nama Siswa</th>
+                                <th>Hadir</th>
+                                <th>Sakit</th>
+                                <th>Ijin</th>
+                                <th>Tanpa Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($data_jadwal as $jadwal) : ?>
+                            <?php foreach ($data_siswa as $siswa) : ?>
                                 <tr>
-                                    <td><?= $jadwal->mapel_nama ?></td>
-                                    <td><?= $jadwal->kelas_tingkat ?> <?= $jadwal->jurusan_nama ?> <?= $jadwal->kelas_abjad ?></td>
-                                    <td><?= $jadwal->jadwal_hari ?></td>
-                                    <td><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
+                                    <td><?= $siswa->siswa_nama ?></td>
+                                    <td><?= $siswa->absensi->H ?></td>
+                                    <td><?= $siswa->absensi->I ?></td>
+                                    <td><?= $siswa->absensi->S ?></td>
+                                    <td><?= $siswa->absensi->A ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

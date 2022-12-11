@@ -94,4 +94,19 @@ class JadwalModel extends Model
         // dd($this->getCompiledSelect());
         return $this->first()->jumlah;
     }
+
+    public function cekGuruMengajar($guru_id, $mapel_id, $kelas_id)
+    {
+        $this->join('kelas', 'kelas.kelas_id = jadwal.kelas_id');
+        $this->join('mapel', 'mapel.mapel_id = jadwal.mapel_id');
+        $this->join('guru', 'guru.guru_id = mapel.guru_id');
+        $this->where('mapel.guru_id', $guru_id);
+        $this->where('jadwal.mapel_id', $mapel_id);
+        $this->where('jadwal.kelas_id', $kelas_id);
+
+        $result = $this->first();
+        if ($result != null)
+            return true;
+        return false;
+    }
 }

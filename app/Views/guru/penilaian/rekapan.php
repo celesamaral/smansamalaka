@@ -23,8 +23,11 @@
                         <?= form_open('guru/hitung_nilai') ?>
                         <input type="hidden" name="kelas_id" value="<?= $kelas->kelas_id ?>">
                         <input type="hidden" name="mapel_id" value="<?= $mapel->mapel_id ?>">
-                        <button type="submit" class="btn btn-success">Hitung Nilai</button>
+                        <button type="submit" class="btn btn-success m-1">Hitung Nilai</button>
                         </form>
+                        <a href="<?= base_url('guru/penilaian/' . $kelas->kelas_id . '/' . $mapel->mapel_id . '/cetak') ?>" class="btn btn-warning ml-2 mr-2 m-1"><i class="bi bi-printer"></i>
+                            Cetak
+                        </a>
                     </div>
                     <?php $no = 1; ?>
                     <table class="table datatable">

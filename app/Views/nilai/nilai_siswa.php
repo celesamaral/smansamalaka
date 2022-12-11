@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Nilai Mata Pelajaran Tahun Ajaran <?= $tahunajaran->tahunajaran_tahun ?> Semester <?= $tahunajaran->tahunajaran_semester ?></h5>
 
-                    <?= form_open('siswa/nilai/cetak', ['target' => '_blank']) ?>
+                    <?= form_open(session('user')->user_type . '/nilai/cetak', ['target' => '_blank']) ?>
                     <input type="hidden" name="siswa_id" value="<?= $siswa->siswa_id ?>">
                     <button type="submit" class="btn btn-success">Cetak</button>
                     </form>

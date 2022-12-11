@@ -1,4 +1,4 @@
-<?= $this->extend('layout_guru'); ?>
+<?= $this->extend('layout_admin'); ?>
 <?= $this->section('title'); ?>
 <?= $title ?>
 <?= $this->endSection(); ?>
@@ -24,29 +24,26 @@
             <?php endif; ?>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Tabel Jadwal Mengajar Guru</h5>
+                    <h5 class="card-title">Absensi Tanggal : <?= $absensi->absensi_tgl ?></h5>
                     <!-- End Tooltips Examples -->
-                    <a href="<?= base_url('guru/jadwal/cetak') ?>" class="btn btn-warning btn-sm ml-2 mr-2 m-1"><i class="bi bi-printer"></i>
-                        Cetak
-                    </a>
-                    <table class="table datatable">
+                    <h5 class="card-title">Kelas <?= $kelas->kelas_tingkat ?> <?= $kelas->jurusan_nama ?> <?= $kelas->kelas_abjad ?></h5>
+                    <div class="d-flex justify-content-end mb-4">
+                        <a href="<?= base_url('admin/absensi/' . $absensi->absensi_id . '/' . $kelas->kelas_id . '/cetak') ?>" class="btn btn-sm btn-warning"><i class="bi bi-printer"></i> Cetak</a>
+                    </div>
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Mata Pelajaran</th>
-                                <th>Kelas</th>
-                                <th>Hari</th>
-                                <th>Waktu</th>
+                                <th>Nama Siswa</th>
+                                <th style="width: 20%;">Kehadiran</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($data_jadwal as $jadwal) : ?>
+                            <?php foreach ($data_absensi as $absen) : ?>
                                 <tr>
-                                    <td><?= $jadwal->mapel_nama ?></td>
-                                    <td><?= $jadwal->kelas_tingkat ?> <?= $jadwal->jurusan_nama ?> <?= $jadwal->kelas_abjad ?></td>
-                                    <td><?= $jadwal->jadwal_hari ?></td>
-                                    <td><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
+                                    <td><?= $absen->siswa_nama ?></td>
+                                    <td><?= $absen->detailabsensi_kehadiran ?></td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php endforeach ?>
                         </tbody>
                     </table>
                 </div>

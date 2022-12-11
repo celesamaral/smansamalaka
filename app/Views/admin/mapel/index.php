@@ -28,10 +28,12 @@
                     <!-- End Tooltips Examples -->
                     <div class="d-flex justify-content-end mb-4">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#form">
+                        <button type="button" class="btn btn-primary btn-sm m-2" data-bs-toggle="modal" data-bs-target="#form">
                             <i class="bi bi-plus"></i>
                             Tambah Mata Pelajaran
                         </button>
+                        <a href="<?= base_url('admin/mapel/cetak') ?>" class="btn btn-warning btn-sm m-2">
+                            <i class="bi bi-printer"></i> Cetak</a>
                     </div>
 
                     <table class="table table-bordered datatable">

@@ -154,7 +154,12 @@
           <span>Jadwal Mengajar</span>
         </a>
       </li>
-
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('guru/absensimapel') ?>">
+          <i class="bi bi-card-list"></i>
+          <span>Absensi Mata Pelajaran</span>
+        </a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="<?= base_url('guru/penilaian') ?>">
@@ -164,6 +169,7 @@
       </li><!-- End Profile Page Nav -->
 
       <?php if (cekWali()) : ?>
+        <li class="nav-heading">Wali Kelas</li>
         <li class="nav-item">
           <a class="nav-link collapsed" href="<?= base_url('guru/walikelas') ?>">
             <i class="bi bi-diagram-3-fill"></i>
