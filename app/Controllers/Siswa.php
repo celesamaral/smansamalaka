@@ -25,7 +25,7 @@ class Siswa extends BaseController
         // dd($data_siswa);
         return view('siswa/index', $data);
     }
-    public function cetakbaru()
+    public function cetak_baru()
     {
         $model = new SiswaModel();
         $data_siswa = $model->getSiswaBaru();
