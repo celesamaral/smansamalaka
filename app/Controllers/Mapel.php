@@ -7,6 +7,7 @@ use App\Models\GuruModel;
 use App\Models\MapelModel;
 use App\Models\KdModel;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Mapel extends BaseController
 {
@@ -37,7 +38,9 @@ class Mapel extends BaseController
             'data_mapel' => $data_mapel,
             'data_guru' => $data_guru
         ];
-        $dompdf = new Dompdf();
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
         $dompdf->loadHtml(view('admin/mapel/cetak', $data));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();

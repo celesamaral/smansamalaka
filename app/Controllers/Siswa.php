@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\KelasModel;
 use App\Models\SiswaModel;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Siswa extends BaseController
 {
@@ -38,7 +39,9 @@ class Siswa extends BaseController
             'data_kelas' => $data_kelas
         ];
         // dd($data_siswa);
-        $dompdf = new Dompdf();
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
         $dompdf->loadHtml(view('siswa/cetak_baru', $data));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
@@ -141,7 +144,9 @@ class Siswa extends BaseController
             'title' => 'Siswa Aktif',
             'data_siswa' => $data_siswa
         ];
-        $dompdf = new Dompdf();
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
         $dompdf->loadHtml(view('siswa/cetak_aktif', $data));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();

@@ -9,6 +9,7 @@ use App\Models\SiswaModel;
 use App\Models\UserModel;
 use App\Models\WaliKelasModel;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Guru extends BaseController
 {
@@ -27,7 +28,9 @@ class Guru extends BaseController
         $model = new GuruModel();
         $data['title'] = 'Guru';
         $data['data_guru'] = $model->findAll();
-        $dompdf = new Dompdf();
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
         $dompdf->loadHtml(view('admin/guru/cetak', $data));
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
