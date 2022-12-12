@@ -73,6 +73,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <?= form_open('admin/mapel/update') ?>
+                                            <input type="hidden" name="mapel_id" value="<?= $mapel->mapel_id ?>">
                                             <div class="modal-body">
                                                 <div class="form-group mb-4">
                                                     <label for="mapel_nama">Nama Mata Pelajaran</label>
