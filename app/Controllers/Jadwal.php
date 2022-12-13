@@ -161,6 +161,8 @@ class Jadwal extends BaseController
     public function cetak_jadwal_kelas()
     {
         $kelas_id = session('siswa')->kelas_id;
+        $model = new KelasModel();
+        $kelas = $model->findSingle($kelas_id);
         $model = new HariModel();
         $data_hari = $model->findAll();
 
@@ -173,7 +175,8 @@ class Jadwal extends BaseController
 
         $data = [
             'title' => 'Jadwal Pelajaran',
-            'data_hari' => $data_hari
+            'data_hari' => $data_hari,
+            'kelas' => $kelas
         ];
         $options = new Options();
         $options->set('isRemoteEnabled', true);

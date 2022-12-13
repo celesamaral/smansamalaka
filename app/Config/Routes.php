@@ -155,6 +155,7 @@ $routes->group('guru', ['filter' => 'guruFilter'], static function ($routes) {
     $routes->get('jadwal/cetak', 'Jadwal::cetak_jadwal_guru');
     $routes->get('walikelas', 'Guru::wali_kelas');
     $routes->get('walikelas/nilai/(:any)', 'Penilaian::rekapan_siswa/$1');
+    $routes->post('nilai/cetak', 'Penilaian::cetak_nilai');
     $routes->get('walikelas/(:any)', 'Guru::wali_kelas/$1');
     $routes->get('profil', 'Profil::profil_guru');
     $routes->post('ganti_password', 'Profil::ganti_password');

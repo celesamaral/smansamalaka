@@ -57,7 +57,10 @@ class KelasModel extends Model
     public function findSingle($kelas_id)
     {
         $this->join('jurusan', 'jurusan.jurusan_id = kelas.jurusan_id');
-        return $this->find($kelas_id);
+        $this->join('walikelas', 'walikelas.kelas_id = kelas.kelas_id');
+        $this->join('guru', 'guru.guru_id = walikelas.guru_id');
+        $this->where('kelas.kelas_id', $kelas_id);
+        return $this->first();
     }
     public function findKelasBaru()
     {

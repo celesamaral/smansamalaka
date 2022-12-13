@@ -17,7 +17,7 @@
                 <td>
                     <center>
                         <b class="text-danger">PEMERINTAH PROVINSI NUSA TENGGARA TIMUR</b><br>
-                        <b>DINAS PENDIDIKAN DAN KEBUDAYAAN</b><br>
+                        <b>DINAS PENDIDIKAN DAN KEBUDAYAAN KABUPATEN MALAKA</b><br>
                         <b>SMA NEGERI 1 MALAKA BARAT</b><br>
                         <b>JL. MAROERAI - BESIKAMA, 85763</b><br>
                         <b>email : smansamalbar@gmail.com</b>
@@ -33,9 +33,10 @@
             <h4 class="text-align-center">DATA SISWA BARU</h4>
         </center>
         <!-- End Tooltips Examples -->
-        <table class="table">
+        <table class="table table-border">
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>NISN</th>
                     <th>NIS</th>
                     <th>Nama</th>
@@ -43,8 +44,10 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data_siswa as $siswa) : ?>
+                <?php $no = 1;
+                foreach ($data_siswa as $siswa) : ?>
                     <tr>
+                        <td><?= $no++ ?></td>
                         <td><?= $siswa->siswa_nisn ?></td>
                         <td><?= $siswa->siswa_nis ?></td>
                         <td><?= $siswa->siswa_nama ?></td>
@@ -52,6 +55,22 @@
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+        </table>
+
+        <!-- Vaidasi -->
+
+        <table class="table table-borderless">
+            <tr>
+                <td style="width: 50%;"></td>
+                <td>
+                    <div class="text-center">
+                        <span class="text-center">Malaka Barat, <?= date('d-m-Y') ?></span><br>
+                        <span class="text-center">Kepala Sekolah SMA Negeri 1 Malaka Barat,</span> <br><br><br>
+                        <span class="text-center"><?= kepalasekolah()->kepalasekolah_nama ?></span><br>
+                        <span class="text-center">NIP.<?= kepalasekolah()->kepalasekolah_nip ?></span>
+                    </div>
+                </td>
+            </tr>
         </table>
 
 

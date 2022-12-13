@@ -35,7 +35,7 @@
                 <td>
                     <center>
                         <b class="text-danger">PEMERINTAH PROVINSI NUSA TENGGARA TIMUR</b><br>
-                        <b>DINAS PENDIDIKAN DAN KEBUDAYAAN</b><br>
+                        <b>DINAS PENDIDIKAN DAN KEBUDAYAAN KABUPATEN MALAKA</b><br>
                         <b>SMA NEGERI 1 MALAKA BARAT</b><br>
                         <b>JL. MAROERAI - BESIKAMA, 85763</b><br>
                         <b>email : smansamalbar@gmail.com</b>
@@ -55,14 +55,17 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>Tingkat</th>
                     <th>Jurusan</th>
                     <th>Angka/Abjad</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data_kelas as $kelas) : ?>
+                <?php $no = 1;
+                foreach ($data_kelas as $kelas) : ?>
                     <tr>
+                        <td><?= $no++ ?></td>
                         <td><?= $kelas->kelas_tingkat ?></td>
                         <td><?= $kelas->jurusan_nama ?></td>
                         <td><?= $kelas->kelas_abjad ?></td>
@@ -72,6 +75,21 @@
         </table>
     </div>
 
+    <!-- Vaidasi -->
+
+    <table class="table table-borderless">
+        <tr>
+            <td style="width: 50%;"></td>
+            <td>
+                <div class="text-center">
+                    <span class="text-center">Malaka Barat, <?= date('d-m-Y') ?></span><br>
+                    <span class="text-center">Kepala Sekolah SMA Negeri 1 Malaka Barat,</span> <br><br><br>
+                    <span class="text-center"><?= kepalasekolah()->kepalasekolah_nama ?></span><br>
+                    <span class="text-center">NIP.<?= kepalasekolah()->kepalasekolah_nip ?></span>
+                </div>
+            </td>
+        </tr>
+    </table>
 
 </body>
 

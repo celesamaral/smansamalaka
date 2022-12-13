@@ -17,7 +17,7 @@
                 <td>
                     <center>
                         <b class="text-danger">PEMERINTAH PROVINSI NUSA TENGGARA TIMUR</b><br>
-                        <b>DINAS PENDIDIKAN DAN KEBUDAYAAN</b><br>
+                        <b>DINAS PENDIDIKAN DAN KEBUDAYAAN MALAKA BARAT</b><br>
                         <b>SMA NEGERI 1 MALAKA BARAT</b><br>
                         <b>JL. MAROERAI - BESIKAMA, 85763</b><br>
                         <b>email : smansamalbar@gmail.com</b>
@@ -33,7 +33,7 @@
             <h4 class="text-align-center">DATA SISWA AKTIF</h4>
         </center>
         <!-- End Tooltips Examples -->
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>No</th>
@@ -59,6 +59,23 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+
+        <!-- Vaidasi -->
+
+        <table class="table table-borderless">
+            <tr>
+                <td style="width: 50%;"></td>
+                <td>
+                    <div class="text-center">
+                        <span class="text-center">Malaka Barat, <?= date('d-m-Y') ?></span><br>
+                        <span class="text-center">Kepala Sekolah SMA Negeri 1 Malaka Barat,</span> <br><br><br>
+                        <span class="text-center"><?= kepalasekolah()->kepalasekolah_nama ?></span><br>
+                        <span class="text-center">NIP.<?= kepalasekolah()->kepalasekolah_nip ?></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
 
 
 </body>

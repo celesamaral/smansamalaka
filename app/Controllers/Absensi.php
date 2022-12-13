@@ -417,7 +417,7 @@ class Absensi extends BaseController
             $kelas = $model->findSingle($kelas_id);
 
             $model = new MapelModel();
-            $mapel = $model->find($mapel_id);
+            $mapel = $model->findSingle($mapel_id);
             $data = [
                 'title' => 'Rekapan Absensi Mata Pelajaran',
                 'data_siswa' => $data_siswa,

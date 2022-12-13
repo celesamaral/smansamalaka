@@ -2,6 +2,7 @@
 
 use App\Controllers\WaliKelas;
 use App\Models\GuruModel;
+use App\Models\KepalaSekolahModel;
 use App\Models\SiswaModel;
 use App\Models\TahunAjaranModel;
 use App\Models\UserModel;
@@ -49,5 +50,11 @@ function tahunajaran()
 {
     $model = new TahunAjaranModel();
     $model->where('tahunajaran_status', 'aktif');
+    return $model->first();
+}
+function kepalasekolah()
+{
+    $model = new KepalaSekolahModel();
+    $model->where('kepalasekolah_status', 'aktif');
     return $model->first();
 }

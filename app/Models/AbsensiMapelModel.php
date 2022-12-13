@@ -64,6 +64,7 @@ class AbsensiMapelModel extends Model
         $this->where('absensimapel.absensimapel_id', $absensimapel_id);
         $this->join('kelas', 'kelas.kelas_id = absensimapel.kelas_id');
         $this->join('mapel', 'mapel.mapel_id = absensimapel.mapel_id');
+        $this->join('guru', 'guru.guru_id = mapel.guru_id');
         $this->join('tahunajaran', 'tahunajaran.tahunajaran_id = absensimapel.tahunajaran_id');
         return $this->first();
     }

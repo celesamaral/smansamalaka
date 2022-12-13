@@ -50,6 +50,12 @@ class MapelModel extends Model
         $this->join('guru', 'guru.guru_id = mapel.guru_id');
         return $this->findAll();
     }
+    public function findSingle($mapel_id)
+    {
+        $this->join('guru', 'guru.guru_id = mapel.guru_id');
+        $this->where('mapel_id', $mapel_id);
+        return $this->first();
+    }
 
     public function findMapelKelas($kelas)
     {

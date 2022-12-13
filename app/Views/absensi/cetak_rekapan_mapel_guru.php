@@ -35,7 +35,7 @@
                 <td>
                     <center>
                         <b class="text-danger">PEMERINTAH PROVINSI NUSA TENGGARA TIMUR</b><br>
-                        <b>DINAS PENDIDIKAN DAN KEBUDAYAAN</b><br>
+                        <b>DINAS PENDIDIKAN DAN KEBUDAYAAN KABUPATEN MALAKA</b><br>
                         <b>SMA NEGERI 1 MALAKA BARAT</b><br>
                         <b>JL. MAROERAI - BESIKAMA, 85763</b><br>
                         <b>email : smansamalbar@gmail.com</b>
@@ -56,6 +56,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>Nama Siswa</th>
                     <th>Hadir</th>
                     <th>Sakit</th>
@@ -64,8 +65,10 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data_siswa as $siswa) : ?>
+                <?php $no = 1;
+                foreach ($data_siswa as $siswa) : ?>
                     <tr>
+                        <td><?= $no++ ?></td>
                         <td><?= $siswa->siswa_nama ?></td>
                         <td><?= $siswa->absensi->H ?></td>
                         <td><?= $siswa->absensi->I ?></td>
@@ -77,6 +80,21 @@
         </table>
     </div>
 
+    <!-- Vaidasi -->
+
+    <table class="table table-borderless">
+        <tr>
+            <td style="width: 50%;"></td>
+            <td>
+                <div class="text-center">
+                    <span class="text-center">Malaka Barat, <?= date('d-m-Y') ?></span><br>
+                    <span class="text-center">Guru Mata Pelajaran,</span> <br><br><br>
+                    <span class="text-center"><?= $mapel->guru_nama ?></span><br>
+                    <span class="text-center">NIP.<?= $mapel->guru_nip ?></span>
+                </div>
+            </td>
+        </tr>
+    </table>
 
 </body>
 
