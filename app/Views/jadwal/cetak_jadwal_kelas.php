@@ -65,7 +65,7 @@
                     <tbody>
                         <?php foreach ($hari->jadwal as $jadwal) : ?>
                             <tr>
-                                <td style="padding: 1px;"><?= ($jadwal->jadwal_jenis == 'Pelajaran') ? $jadwal->mapel_nama : '<b>' . $jadwal->jadwal_jenis . '</b>' ?></td>
+                                <td style="padding: 1px; width:50%;"><?= ($jadwal->jadwal_jenis == 'Pelajaran') ? $jadwal->mapel_nama : '<b>' . $jadwal->jadwal_jenis . '</b>' ?></td>
                                 <td style="padding: 1px;"><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
                             </tr>
                         <?php endforeach; ?>
