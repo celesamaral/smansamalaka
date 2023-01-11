@@ -25,6 +25,7 @@ class Jadwal extends BaseController
 
             $model = new KelasModel();
             $kelas = $model->findSingle($kelas_id);
+            // dd($model->getLastQuery());
 
             $model = new MapelModel();
             $data_mapel = $model->findMapelKelas($kelas);
@@ -41,6 +42,7 @@ class Jadwal extends BaseController
 
         $model = new KelasModel();
         $data_kelas = $model->findKelas();
+        // dd($model->getLastQuery());
         $data = [
             'title' => 'Jadwal Pelajaran',
             'data_kelas' => $data_kelas

@@ -64,7 +64,6 @@ class MapelModel extends Model
             ->where('mapel.mapel_kelompok', $kelas->jurusan_nama)
             ->orWhere('mapel.mapel_kelompok', 'umum')
             ->groupEnd();
-
         $this->join('guru', 'guru.guru_id = mapel.guru_id');
         return $this->findAll();
     }

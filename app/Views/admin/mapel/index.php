@@ -172,7 +172,7 @@
                     <select type="text" class="form-select <?= (isset(session('errors')['mapel_kelompok'])) ? 'is-invalid' : '' ?>" id="mapel_kelompok" name="mapel_kelompok" value="<?= old('mapel_kelompok') ?>">
                         <option value="">Pilih Kelompok</option>
                         <option value="umum" <?= set_select('mapel_kelompok', 'umum', (old('mapel_kelompok') == 'umum')) ?>>Umum</option>
-                        <option value="XI" <?= set_select('mapel_kelompok', 'IPA', (old('mapel_kelompok') == 'IPA')) ?>>IPA</option>
+                        <option value="IPA" <?= set_select('mapel_kelompok', 'IPA', (old('mapel_kelompok') == 'IPA')) ?>>IPA</option>
                         <option value="IPS" <?= set_select('mapel_kelompok', 'IPS', (old('mapel_kelompok') == 'IPS')) ?>>IPS</option>
                     </select>
                     <div class="invalid-feedback">

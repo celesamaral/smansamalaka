@@ -48,6 +48,7 @@ class KelasModel extends Model
     {
         if ($jurusan_id != null)
             $this->where('kelas.jurusan_id', $jurusan_id);
+        $this->select('kelas.*, jurusan.*,guru.*');
         $this->where('kelas.kelas_tingkat !=', 'umum');
         $this->join('jurusan', 'jurusan.jurusan_id = kelas.jurusan_id');
         $this->join('walikelas', 'walikelas.kelas_id = kelas.kelas_id', 'left');
@@ -56,9 +57,10 @@ class KelasModel extends Model
     }
     public function findSingle($kelas_id)
     {
+        $this->select('kelas.*, jurusan.*,guru.*');
         $this->join('jurusan', 'jurusan.jurusan_id = kelas.jurusan_id');
-        $this->join('walikelas', 'walikelas.kelas_id = kelas.kelas_id');
-        $this->join('guru', 'guru.guru_id = walikelas.guru_id');
+        $this->join('walikelas', 'walikelas.kelas_id = kelas.kelas_id', 'left');
+        $this->join('guru', 'guru.guru_id = walikelas.guru_id', 'left');
         $this->where('kelas.kelas_id', $kelas_id);
         return $this->first();
     }
