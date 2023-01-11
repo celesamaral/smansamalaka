@@ -163,7 +163,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Form Siswa</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Form Jadwal</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <?= form_open('admin/jadwal/store') ?>
@@ -186,8 +186,8 @@
 
                 <div class="form-group mb-4">
                     <label for="jadwal_jenis">Jenis</label>
-                    <select class="form-select <?= (isset(session('errors')['jadwal_jenis'])) ? 'is-invalid' : '' ?>" id="jadwal_jenis" name="jadwal_jenis">
-                        <option value=""></option>
+                    <select class="form-select <?= (isset(session('errors')['jadwal_jenis'])) ? 'is-invalid' : '' ?>" id="jadwal_jenis_add" name="jadwal_jenis">
+                        <option value="" selected></option>
                         <option value="Pelajaran" <?= set_select('jadwal_jenis', 'Pelajaran', (old('jadwal_jenis') == 'Pelajaran')) ?>>Pelajaran</option>
                         <option value="Istirahat" <?= set_select('jadwal_jenis', 'Istirahat', (old('jadwal_jenis') == 'Istirahat')) ?>>Istirahat</option>
                     </select>
@@ -197,7 +197,7 @@
                         <?php endif; ?>
                     </div>
                 </div>
-                <div id="pelajaran">
+                <div id="pelajaran_add">
                     <div class="form-group mb-4">
                         <label for="mapel_id">Mata Pelajaran</label>
                         <select class="form-select <?= (isset(session('errors')['mapel_id'])) ? 'is-invalid' : '' ?>" id="mapel_id" name="mapel_id" required>
@@ -252,17 +252,19 @@
     //     alert('Page is loaded');
     // };
     $(document).ready(function() {
-        if ($('#jadwal_jenis').val() != 'Pelajaran') {
-            pelajaran = $('#pelajaran').children();
-            $('#pelajaran').empty();
+        console.log($('#jadwal_jenis_add').val());
+
+        if ($('#jadwal_jenis_add').val() != 'Pelajaran') {
+            pelajaran = $('#pelajaran_add').children();
+            $('#pelajaran_add').empty();
         }
     });
-    $('#jadwal_jenis').on('change', function() {
+    $('#jadwal_jenis_add').on('change', function() {
         if (this.value == 'Pelajaran') {
             // alert(pelajaran);
-            $('#pelajaran').append(pelajaran);
+            $('#pelajaran_add').append(pelajaran);
         } else {
-            $('#pelajaran').empty();
+            $('#pelajaran_add').empty();
         }
     });
 </script>
