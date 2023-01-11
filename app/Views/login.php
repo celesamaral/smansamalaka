@@ -47,7 +47,7 @@
                             <div class="d-flex justify-content-center py-4">
                                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                                     <!-- <img src="<?= base_url() ?>/assets/img/logo.png" alt=""> -->
-                                    <span class="d-none d-lg-block">SMA Negeri 1 Malaka</span>
+                                    <span class="d-none d-lg-block">SMA Negeri 1 Malaka Barat</span>
                                 </a>
                                 <?php if (session()->has('error')) : ?>
                                     <div class="alert alert-danger"><?= session('error') ?></div>

@@ -466,6 +466,8 @@ class Penilaian extends BaseController
         $siswa_id = $this->request->getPost('siswa_id');
         $model = new SiswaModel();
         $siswa = $model->find($siswa_id);
+        $model = new KelasModel();
+        $kelas = $model->findSingle($siswa->kelas_id);
         $model = new TahunAjaranModel();
         $tahunajaran = $model->where('tahunajaran_status', 'aktif')->first();
         $model = new MapelModel();
@@ -505,8 +507,10 @@ class Penilaian extends BaseController
         $data = [
             'data_mapel' => $data_mapel,
             'tahunajaran' => $tahunajaran,
-            'siswa' => $siswa
+            'siswa' => $siswa,
+            'kelas' => $kelas,
         ];
+        // dd($data_mapel);
         $options = new Options();
         $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
