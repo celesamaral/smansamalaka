@@ -51,23 +51,23 @@
             <h4 class="text-align-center">JADWAL MENGAJAR</h4>
         </center>
         <!-- End Tooltips Examples -->
-
-        <table class="table table-bordered">
+        <p><b>Guru : <?= guru()->guru_nama ?></b></p>
+        <table class="table table-bordered small">
             <thead>
                 <tr>
-                    <th>Mata Pelajaran</th>
-                    <th>Kelas</th>
-                    <th>Hari</th>
-                    <th>Waktu</th>
+                    <th style="padding: 1px;">Mata Pelajaran</th>
+                    <th style="padding: 1px;">Kelas</th>
+                    <th style="padding: 1px;">Hari</th>
+                    <th style="padding: 1px;">Waktu</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($data_jadwal as $jadwal) : ?>
                     <tr>
-                        <td><?= $jadwal->mapel_nama ?></td>
-                        <td><?= $jadwal->kelas_tingkat ?> <?= $jadwal->jurusan_nama ?> <?= $jadwal->kelas_abjad ?></td>
-                        <td><?= $jadwal->jadwal_hari ?></td>
-                        <td><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
+                        <td style="padding: 1px;"><?= $jadwal->mapel_nama ?></td>
+                        <td style="padding: 1px;"><?= $jadwal->kelas_tingkat ?> <?= $jadwal->jurusan_nama ?> <?= $jadwal->kelas_abjad ?></td>
+                        <td style="padding: 1px;"><?= $jadwal->jadwal_hari ?></td>
+                        <td style="padding: 1px;"><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

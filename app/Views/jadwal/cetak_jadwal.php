@@ -52,22 +52,22 @@
         </center>
         <!-- End Tooltips Examples -->
         <p>Kelas : <?= $kelas->kelas_tingkat ?> <?= $kelas->jurusan_nama ?> <?= $kelas->kelas_abjad ?></p>
-        <table class="table table-bordered">
+        <table class="table table-bordered small">
             <thead>
                 <tr>
-                    <th>Hari</th>
-                    <th>Jenis</th>
-                    <th>Waktu</th>
-                    <th>Mata Pelajaran</th>
+                    <th style="padding: 1px;">Hari</th>
+                    <th style="padding: 1px;">Jenis</th>
+                    <th style="padding: 1px;">Waktu</th>
+                    <th style="padding: 1px;">Mata Pelajaran</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($data_jadwal as $jadwal) : ?>
                     <tr>
-                        <td><?= $jadwal->jadwal_hari ?></td>
-                        <td><?= $jadwal->jadwal_jenis ?></td>
-                        <td><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
-                        <td><?= $jadwal->mapel_nama ?></td>
+                        <td style="padding: 1px;"><?= $jadwal->jadwal_hari ?></td>
+                        <td style="padding: 1px;"><?= $jadwal->jadwal_jenis ?></td>
+                        <td style="padding: 1px;"><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
+                        <td style="padding: 1px;"><?= $jadwal->mapel_nama ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -28,7 +28,7 @@
 
 <body>
     <div class="container">
-        <table class="table table-borderless">
+        <table class="table table-borderless mb-1">
             <tr>
                 <td style="width: 15%;"><img height="75px" src="http://localhost/smansamalaka/public/assets/img/logo-ntt.jpg" alt="" class="img-fluid"></td>
 
@@ -55,18 +55,18 @@
         <?php foreach ($data_hari as $hari) : ?>
             <?php if (!empty($hari->jadwal)) : ?>
                 <h5><?= $hari->hari_nama ?></h5>
-                <table class="table table-bordered">
+                <table class="table table-bordered small">
                     <thead>
                         <tr>
-                            <th>Mata Pelajaran</th>
-                            <th>Waktu</th>
+                            <th style="padding: 1px;">Mata Pelajaran</th>
+                            <th style="padding: 1px;">Waktu</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($hari->jadwal as $jadwal) : ?>
                             <tr>
-                                <td><?= ($jadwal->jadwal_jenis == 'Pelajaran') ? $jadwal->mapel_nama : '<b>' . $jadwal->jadwal_jenis . '</b>' ?></td>
-                                <td><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
+                                <td style="padding: 1px;"><?= ($jadwal->jadwal_jenis == 'Pelajaran') ? $jadwal->mapel_nama : '<b>' . $jadwal->jadwal_jenis . '</b>' ?></td>
+                                <td style="padding: 1px;"><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
