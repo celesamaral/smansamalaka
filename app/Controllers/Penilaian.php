@@ -508,7 +508,7 @@ class Penilaian extends BaseController
             'data_mapel' => $data_mapel,
             'tahunajaran' => $tahunajaran,
             'siswa' => $siswa,
-            'kelas' => $kelas,
+            'kelas' => $kelas
         ];
         // dd($data_mapel);
         $options = new Options();

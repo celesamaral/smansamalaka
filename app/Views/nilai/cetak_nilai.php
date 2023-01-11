@@ -3,8 +3,16 @@
 
 <head>
     <meta charset="utf-8">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
+
+<style>
+    .borderless tr,
+    .borderless td,
+    .borderless th {
+        border: none !important;
+    }
+</style>
 
 <body>
     <div class="container">
@@ -69,14 +77,16 @@
 
         <!-- Vaidasi -->
 
-        <table class="table table-borderless">
+        <table class="table borderless">
             <tr>
-                <td style="width: 50%;"></td>
-                <div class="text-center">
-                    <br>
-                    <span class="text-center">Orang Tua Siswa</span> <br><br><br>
-                    <span class="text-center">(....................................))</span><br>
-                </div>
+                <td style="width: 50%;">
+                    <div class="text-center">
+                        <br>
+                        <span class="text-center">Orang Tua Siswa</span> <br><br><br>
+                        <span class="text-center">(....................................)</span><br>
+                    </div>
+                </td>
+
                 <td>
                     <div class="text-center">
                         <span class="text-center">Malaka Barat, <?= date('d-m-Y') ?></span><br>
@@ -86,14 +96,16 @@
                     </div>
                 </td>
             </tr>
-        </table>
-        <tr>
-            <td colspan="2">
-                <div class="text-center">
-                    <br>
-                </div>
-            </td>
-        </tr>
+            <tr style="border: 0px;">
+                <td colspan="2">
+                    <div class="text-center">
+                        <br>
+                        <span class="text-center">Guru</span> <br><br><br>
+                        <span class="text-center"><?= $kelas->guru_nama ?></span><br>
+                        <span class="text-center">NIP.<?= $kelas->guru_nip ?></span>
+                    </div>
+                </td>
+            </tr>
         </table>
 
 
