@@ -52,28 +52,28 @@
         </center>
         <!-- End Tooltips Examples -->
 
-        <?php foreach ($data_hari as $hari) : ?>
-            <?php if (!empty($hari->jadwal)) : ?>
-                <h5><?= $hari->hari_nama ?></h5>
-                <table class="table table-bordered small">
-                    <thead>
-                        <tr>
-                            <th style="padding: 1px;">Mata Pelajaran</th>
-                            <th style="padding: 1px;">Waktu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <table class="table table-bordered small">
+            <thead>
+                <tr>
+                    <th style="padding: 1px;">Hari</th>
+                    <th style="padding: 1px;">Mata Pelajaran</th>
+                    <th style="padding: 1px;">Waktu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($data_hari as $hari) : ?>
+                    <?php if (!empty($hari->jadwal)) : ?>
                         <?php foreach ($hari->jadwal as $jadwal) : ?>
                             <tr>
-                                <td style="padding: 1px; width:50%;"><?= ($jadwal->jadwal_jenis == 'Pelajaran') ? $jadwal->mapel_nama : '<b>' . $jadwal->jadwal_jenis . '</b>' ?></td>
+                                <td style="padding: 1px; width:auto"><?= $hari->hari_nama ?></td>
+                                <td style=" padding: 1px; width:50%;"><?= ($jadwal->jadwal_jenis == 'Pelajaran') ? $jadwal->mapel_nama : '<b>' . $jadwal->jadwal_jenis . '</b>' ?></td>
                                 <td style="padding: 1px;"><?= $jadwal->jadwal_mulai ?> - <?= $jadwal->jadwal_selesai ?></td>
                             </tr>
                         <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php endif ?>
-        <?php endforeach; ?>
-
+                    <?php endif ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 
     <!-- Vaidasi -->
