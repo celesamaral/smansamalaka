@@ -52,6 +52,7 @@
         </center>
         <!-- End Tooltips Examples -->
         <p><b>Guru : <?= guru()->guru_nama ?></b></p>
+        <p><b>Tahun Ajaran : </b> <?= tahunajaran()->tahunajaran_tahun ?> Semester <?= tahunajaran()->tahunajaran_semester ?></p>
         <table class="table table-bordered small">
             <thead>
                 <tr>
